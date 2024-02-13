@@ -222,6 +222,7 @@ function qrCodeInput(e){
   .catch(err => {
     // failure, handle it.
     console.log(`Error scanning file. Reason: ${err}`)
+    alert("Errore scansione QRCode. Riprovare.")
   }).finally(()=>{
     html5QrCode.clear()
   });
