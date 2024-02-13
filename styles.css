@@ -189,7 +189,7 @@ label input{
   outline: none;
 }
 
-button{
+button, span.button{
   outline: none;
   border:0;
   color:var(--card-label-color);
@@ -198,11 +198,14 @@ button{
   cursor:pointer;
   font-weight: bold;
 }
-button.add{
+span.add{
   background-color: #10B981;
 }
 button.remove{
   background-color:crimson;
+}
+span.file{
+  background-color:mediumblue;
 }
 
 a{

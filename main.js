@@ -1,4 +1,9 @@
 import { createClient } from "https://cdn.skypack.dev/@supabase/supabase-js";
+// To use Html5QrcodeScanner (more info below)
+import "./html5-qrcode.js";
+
+// To use Html5Qrcode (more info below)
+//import {Html5Qrcode} from "./html5-qrcode.js";
 
 const supabaseUrl = 'https://eanaqzejvpuhjoaxpkdk.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhbmFxemVqdnB1aGpvYXhwa2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc0NzA3NjcsImV4cCI6MjAyMzA0Njc2N30.qQcrXhRlZqgLH0MRapdZTs_40lm0qB_OXlU-qRs4Q1Q'
@@ -11,6 +16,8 @@ supabase
     document.getElementById("add").addEventListener("click",addElement)
     document.getElementById("search-input").addEventListener("input",searchElement)
     document.querySelectorAll("[type=checkbox]").forEach(e=>e.addEventListener("change",searchDueElement))
+    
+    document.getElementById('qr-input-file').addEventListener('change',qrCodeInput)
     elements=links.map(l=>{return{link:l.links}});renderElements()
   })
           
@@ -195,4 +202,27 @@ function searchDueElement(){
     }
   }
 
+}
+
+function qrCodeInput(e){
+  const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+  if (e.target.files.length == 0) {
+    // No file selected, ignore 
+    return;
+  }
+
+  // Use the first item in the list
+  const imageFile = e.target.files[0];
+  html5QrCode.scanFile(imageFile, /* showImage= */false)
+  .then(qrCodeMessage => {
+    // success, use qrCodeMessage
+    console.log(qrCodeMessage);
+    document.getElementById("newEl-link").value = qrCodeMessage
+  })
+  .catch(err => {
+    // failure, handle it.
+    console.log(`Error scanning file. Reason: ${err}`)
+  }).finally(()=>{
+    html5QrCode.clear()
+  });
 }

@@ -6,11 +6,16 @@
   <title>Fiscalizzazione dispositivi</title>
   <link rel="stylesheet" href="./styles.css"/>
   <link rel="icon" type="image/x-icon" href="icon.jpg">
+  <script 
+    src="https://unpkg.com/html5-qrcode" type="text/javascript" type="module">
+</script>
 </head>
 <body class="">
-  <div style="margin:3rem 0;">
-    <label><span>Link:</span><input id="newEl-link" placeholder="link"/></label>
-    <button id="add" class="add">Add</button>
+  <div style="margin:3rem 0; display:flex;">
+    <label><span></span><input id="newEl-link" placeholder="link"/></label>
+    <label><span class="button file" style="font-size:70%; margin-left:0">QR_Code</span><input style="display:none" id="qr-input-file"  type="file" placeholder="QR Code"/></label>
+    <label><span id="add" class="button add" style="font-size:70%; margin-left:0">Add</span></label>
+    <div id="reader"></div>  
   </div>
   <div class="filter-container">
     <label><span>Search:</span><input placeholder="Search by name" id="search-input" /></label>
