@@ -224,6 +224,6 @@ function qrCodeInput(e){
     console.log(`Error scanning file. Reason: ${err}`)
     alert("Errore scansione QRCode. Riprovare.")
   }).finally(()=>{
-    html5QrCode.clear()
+    //html5QrCode.clear()
   });
 }
