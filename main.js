@@ -66,7 +66,7 @@ function renderElements(){
 
         var cards = Array.from(document.getElementsByClassName("card"))
         cards.sort((a,b)=>a.dataset.name.toLowerCase().localeCompare(b.dataset.name.toLowerCase())).forEach((c,i)=>{
-          // document.querySelector("[data-name='"+c.dataset.name+"']").style.order = i
+          document.querySelector("[data-name='"+c.dataset.name.replace("'","\\'").replace("\"","\\\"")+"']").style.order = i
         })
       }
     })
