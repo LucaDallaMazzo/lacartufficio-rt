@@ -231,7 +231,7 @@ function qrCodeInput(e){
 
 function qrCodeScanner(e){
   function onScanSuccess(decodedText, decodedResult) {
-    alert("Scansionato: "+decodedText)
+    //alert("Scansionato: "+decodedText)
     console.log(`Code matched = ${decodedText}`, decodedResult);
     document.getElementById("newEl-link").value = decodedText
     html5QrcodeScanner.clear();
@@ -241,7 +241,7 @@ function qrCodeScanner(e){
     // handle scan failure, usually better to ignore and keep scanning.
     // for example:
     console.warn(`Code scan error = ${error}`);
-    alert(error)
+    //alert(error)
   }
   
   let html5QrcodeScanner = new Html5QrcodeScanner(
