@@ -177,6 +177,26 @@ label{
   color:var(--card-label-color);
   margin-right: 1rem;
 }
+input[type="checkbox"]{
+  display:none
+}
+label:has(input[type="checkbox"]){
+  padding:5px 10px;
+  border-radius:15px;
+  border:1px solid #11abf350;
+  cursor:pointer;
+}
+label:has(input[type="checkbox"]:checked){
+  background-color:#1be4ff50;
+}
+label:has(input[type="checkbox"]:not(:checked))::before{
+  content:"\229D";
+  margin:5px 10px 5px 0px
+}
+label:has(input[type="checkbox"]:checked)::before{
+  content:"\2713";
+  margin:5px 10px 5px 0px
+}
 label span{
   margin-right:10px
 }
