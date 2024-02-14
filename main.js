@@ -232,15 +232,12 @@ function qrCodeInput(e){
 function qrCodeScanner(e){
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-      /* handle success */
-    // alert(decodedResult)
-    // alert(decodedText)
     document.getElementById("newEl-link").value = decodedText
     html5QrCode.stop().then(()=>{
       html5QrCode.clear();
-
       document.querySelector(".filter-container").classList.remove("none")
       document.querySelector(".card-container").classList.remove("none")
+      document.getElementById("qr-scanner").addEventListener("click",qrCodeScanner)
     })
     
   };
@@ -249,4 +246,13 @@ function qrCodeScanner(e){
   html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
   document.querySelector(".filter-container").classList.add("none")
   document.querySelector(".card-container").classList.add("none")
+  document.getElementById("qr-scanner").removeEventListener("click",qrCodeScanner)
+  document.getElementById("qr-scanner").addEventListener('click',function(){
+    html5QrCode.stop().then(()=>{
+      html5QrCode.clear();
+      document.querySelector(".filter-container").classList.remove("none")
+      document.querySelector(".card-container").classList.remove("none")
+      document.getElementById("qr-scanner").addEventListener("click",qrCodeScanner)
+    })
+  })
 }
