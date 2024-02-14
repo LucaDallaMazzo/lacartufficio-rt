@@ -17,7 +17,8 @@ supabase
     document.getElementById("search-input").addEventListener("input",searchElement)
     document.querySelectorAll("[type=checkbox]").forEach(e=>e.addEventListener("change",searchDueElement))
     
-    document.getElementById('qr-input-file').addEventListener('change',qrCodeInput)
+    // document.getElementById('qr-input-file').addEventListener('change',qrCodeInput)
+    document.getElementById("qr-scanner").addEventListener("click",qrCodeScanner)
     elements=links.map(l=>{return{link:l.links}});renderElements()
   })
           
@@ -65,7 +66,7 @@ function renderElements(){
 
         var cards = Array.from(document.getElementsByClassName("card"))
         cards.sort((a,b)=>a.dataset.name.toLowerCase().localeCompare(b.dataset.name.toLowerCase())).forEach((c,i)=>{
-          document.querySelector("[data-name='"+c.dataset.name+"']").style.order = i
+          // document.querySelector("[data-name='"+c.dataset.name+"']").style.order = i
         })
       }
     })
@@ -226,4 +227,23 @@ function qrCodeInput(e){
   }).finally(()=>{
     //html5QrCode.clear()
   });
+}
+
+function qrCodeScanner(e){
+  function onScanSuccess(decodedText, decodedResult) {
+    // handle the scanned code as you like, for example:
+    console.log(`Code matched = ${decodedText}`, decodedResult);
+  }
+  
+  function onScanFailure(error) {
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
+    console.warn(`Code scan error = ${error}`);
+  }
+  
+  let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: {width: 250, height: 250} },
+    /* verbose= */ false);
+  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }

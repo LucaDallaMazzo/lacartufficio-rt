@@ -247,6 +247,10 @@ a{
   }
   .card {
     width: 100%;
+    padding:.5rem;
+  }
+  .card h4{
+    font-size: 1rem;
   }
   .filter-container{
     display: flex;
