@@ -233,6 +233,8 @@ function qrCodeScanner(e){
   function onScanSuccess(decodedText, decodedResult) {
     // handle the scanned code as you like, for example:
     console.log(`Code matched = ${decodedText}`, decodedResult);
+    document.getElementById("newEl-link").value = decodedText
+    html5QrcodeScanner.clear();
   }
   
   function onScanFailure(error) {
