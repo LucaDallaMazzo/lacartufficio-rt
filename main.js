@@ -230,23 +230,23 @@ function qrCodeInput(e){
 }
 
 function qrCodeScanner(e){
-  function onScanSuccess(decodedText, decodedResult) {
-    //alert("Scansionato: "+decodedText)
-    console.log(`Code matched = ${decodedText}`, decodedResult);
+  const html5QrCode = new Html5Qrcode("reader");
+  const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+      /* handle success */
+    // alert(decodedResult)
+    // alert(decodedText)
     document.getElementById("newEl-link").value = decodedText
-    html5QrcodeScanner.clear();
-  }
+    html5QrCode.stop().then(()=>{
+      html5QrCode.clear();
+
+      document.querySelector(".filter-container").classList.remove("none")
+      document.querySelector(".card-container").classList.remove("none")
+    })
+    
+  };
+  const config = { fps: 10, qrbox: { width: 500, height: 500 } };
   
-  function onScanFailure(error) {
-    // handle scan failure, usually better to ignore and keep scanning.
-    // for example:
-    console.warn(`Code scan error = ${error}`);
-    //alert(error)
-  }
-  
-  let html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader",
-    { fps: 10, qrbox: {width: 250, height: 250} },
-    /* verbose= */ false);
-  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+  document.querySelector(".filter-container").classList.add("none")
+  document.querySelector(".card-container").classList.add("none")
 }
